@@ -1,0 +1,85 @@
+
+
+# Configuración base de la aplicación.
+
+config_lateral_var: 
+  encabezado: "Menu"
+
+  list_formatos_cartas:
+    - F Carta De Nivelacion Salarial - Salario Basico.docx
+    - F Carta De Nivelacion Salarial - Salario Integral.docx
+    - F Carta de Nivelación Salarial - Salario Variable.docx
+    - F Carta de Nombramiento - Salario Basico (Sin cambio de salario).docx
+    - F Otrosí cambio de contrato.docx
+
+  config_formatos:
+    "F Carta de Nombramiento - Salario Basico (Sin cambio de salario).docx":
+      campos_digitar: 
+        "DD de MM de AA" : 'Ingrese una fecha en el formato "DD de MM de AA"'
+        "Nombre del cargo al que pasa." : 'Ingrese el nuevo cargo del colaborador: '
+
+
+
+  seccion_archivo:
+    file_uploader_maestra:
+      clave: "archivo_maestra"
+      titulo: "Cargar maestra de personal"
+      uploader_msg: "📤 Adjuntar maestra personal"
+      limit_msg: "Tamaño máximo 200MB"
+      button_msg: "🗂️ Examinar"
+      tipo_archivos: [".xlsx"]
+      icon: "MdUploadFile"
+
+  seccion_buscar_colab:
+    btn_agregar_colab:
+      clave : btn_agregar_colab
+      etiqueta : Agregar colaborador
+
+    select_box_colaborador:
+      clave: "selector_colaboradores"
+      etiqueta : "Seleccione un colaborador"
+      list_colaboradores:
+      - "5% - 10%"
+      - "10% - 15%"
+      - "15% - 20%"
+      - "20% - 25%"
+      - "25% - 30%"
+      - "30% - 35%"
+      - "35% - 40%"
+      - "40% - 45%"
+      - "45% - 50%"
+
+
+insumos:
+  Maestra_Personal:
+    {}
+  Formatos_cartas:
+    {}
+
+
+cnf_session_keys:
+  editor_df_key: "editor_df_final"
+  inicializacion:
+    list_materiales:
+      valor_inicial: []
+    registro_confirmado: 
+      valor_inicial: false
+    confirmar_edicion_pendiente: 
+      valor_inicial: false
+
+Resultados:
+  path_resultado: "Resultados\\"
+
+dict_cols: 
+  "Sociedad": "Sociedad"
+  "Cta.alternativa": "Cta.alternativa"
+  "Nº cuenta": "Nº cuenta"
+  "Texto p.posición balance/PyG": "Texto p.posición balance/PyG"
+  "TotPerInf": "TotPerInf"
+  "TotPerComp": "TotPerComp"
+  "Desv.abs.": "Desv.abs."
+  "Mon.": "Mon."
+  "agrupador_base" : "agrupador_base"
+  "x" : "x"
+  "y" : "y"
+  "descripcion_cuenta" : "descripcion_cuenta"

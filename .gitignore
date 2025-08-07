@@ -3,3 +3,5 @@
 python-3.12.5-emb/
 !python-3.12.5-emb.zip
 .vscode/
+*__pycache__
+

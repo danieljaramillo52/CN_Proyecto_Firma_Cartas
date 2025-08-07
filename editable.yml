@@ -1,0 +1,16 @@
+base: {}
+
+list_maestra:
+  - "Nombre Completo del Empleado" #Generar nombre completo.
+  - "Nombre empleado" # Generar nombre primer apellido.
+  - "Número de Documento" # CEDULA
+  - "DD de MM de AAAA" # FECHA ANTIGÜEDAD
+  - "Cargo actual del empleado" # CARGO
+  - "Ciudad" #CIUDAD DE TRABAJO
+
+list_digita:
+  - "DD de MM de AA" # Digita
+  - "$ Salario" # Digita
+  - "Nombre del cargo al que pasa." # Digita
+  - 
+
