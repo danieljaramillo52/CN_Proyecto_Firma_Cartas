@@ -1,0 +1,30 @@
+Sub ResaltarPalabrasEnNegrita()
+
+    Dim palabras As Variant
+    Dim palabra As Variant
+    Dim rango As Range
+
+    ' Lista de palabras a resaltar
+    palabras = Array( _
+    "Primera.", "Segunda.", "EMPLEADO", "EMPLEADOR", "MEDELLIN", _
+    "COMERCIAL NUTRESA", "Salario Básico:", "Salario Variable:", _
+    "Fecha_dia_actual")
+    ' Recorrer cada palabra
+    For Each palabra In palabras
+        Set rango = ActiveDocument.Content
+        With rango.Find
+            .ClearFormatting
+            .Text = palabra
+            .Replacement.ClearFormatting
+            .Replacement.Font.Bold = True
+            .Replacement.Text = palabra
+            .Forward = True
+            .Wrap = wdFindContinue
+            .Format = True
+            .MatchCase = True
+            .MatchWholeWord = True
+            .Execute Replace:=wdReplaceAll
+        End With
+    Next palabra
+    
+End Sub

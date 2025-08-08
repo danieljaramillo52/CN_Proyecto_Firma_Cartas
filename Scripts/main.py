@@ -75,7 +75,7 @@ class Aplicacion:
         # Guardar en sesión para posible descarga o vista previa
         st.session_state["documento_generado"] = doc 
         
-        doc.save(f"{st.session_state['text_input_cedula']}_{formato}")
+        doc.save(f"Resultados\\{st.session_state['text_input_cedula']}_{formato}")
 
         st.success("📄 Formato procesado con éxito.")
         

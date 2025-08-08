@@ -9,6 +9,7 @@ config_lateral_var:
     - F Carta De Nivelacion Salarial - Salario Basico.docx
     - F Carta De Nivelacion Salarial - Salario Integral.docx
     - F Carta de Nivelación Salarial - Salario Variable.docx
+    - F Cartas de Nombramiento Salario Variable.docx
     - F Carta de Nombramiento - Salario Basico (Sin cambio de salario).docx
     - F Otrosí cambio de contrato.docx
 
@@ -17,7 +18,7 @@ config_lateral_var:
       campos_digitar: 
         "Fecha_dia_actual" : "Ingrese la fecha de realización de la carta: (DD de MM de AAAA)"
         "DD de MM de AA" : 'Fecha inicio nuevo cargo. (DD de MM de AAAA):'
-        "$ Salario" : 'Ingrese el nuevo salario del colaborador: ($ XXXXX)'
+        "$ Salario" : 'Nuevo salario del colaborador (Ejm: 2.500.000)'
       campos_buscar:
         "Nombre Completo del Empleado" : "NOMBRE COMPLETO EMPLEADO"
         "Nombre empleado": "NOMBRE EMPLEADO"
@@ -44,16 +45,47 @@ config_lateral_var:
         "Nombre empleado": "NOMBRE EMPLEADO"
         "Ciudad" : "CIUDAD DE TRABAJO"
       contiene_tablas: "No"
-    "F Carta de Nombramiento - Salario Basico (Sin cambio de salario).docx":
+    "F Carta De Nivelacion Salarial - Salario Integral.docx":
       campos_digitar: 
         "Fecha_dia_actual" : "Fecha de realización de la carta: (DD de MM de AAAA)"
-        "DD de MM de AA" : 'Fecha inicio nuevo cargo. (DD de MM de AAAA):'
-        "Nuevo Cargo" : 'Nuevo cargo del colaborador: '
+        "DD de MM de AA" : 'Fecha inicio nuevo salario. (DD de MM de AAAA):'
+        "Nombre del cargo": "Cargo del empleado."
+        "$ Salario" : 'Nuevo salario del colaborador (Ejm: 2.500.000)'
+        "Num_horas_semanales" : "Horas semanales de trabajo (Ejm: 45 Of entrar / 47 Region)"
       campos_buscar:
         "Nombre Completo del Empleado" : "NOMBRE COMPLETO EMPLEADO"
         "Nombre empleado": "NOMBRE EMPLEADO"
         "Ciudad" : "CIUDAD DE TRABAJO"
       contiene_tablas: "No"
+    "F Cartas de Nombramiento Salario Variable.docx":
+      campos_digitar: 
+        "Fecha_dia_actual" : "Fecha de realización de la carta: (DD de MM de AAAA)"
+        "DD de MM de AA" : 'Fecha inicio nuevo salario. (DD de MM de AAAA):'
+        "Nuevo Cargo" : 'Nuevo cargo del colaborador: '
+        "Salario Básico." : 'Salario base del colaborador: (Ejm: 1.000.000)'
+        "Salario Variable." : "Salario variable del colaborador: (Ejm: 500.000) "
+      campos_buscar:
+        "Nombre Completo del Empleado" : "NOMBRE COMPLETO EMPLEADO"
+        "Nombre empleado": "NOMBRE EMPLEADO"
+        "Ciudad" : "CIUDAD DE TRABAJO"
+      contiene_tablas: "Sí"
+    "F Formalización de APL en Cargo.docx":
+      campos_digitar: 
+        "Fecha_dia_actual" : "Fecha de realización de la carta: (DD de MM de AAAA)"
+        "DD de MM de AA" : 'Fecha inicio nuevo salario. (DD de MM de AAAA):'
+        "Nuevo Cargo" : 'Nuevo cargo del colaborador: '
+        "$ Salario" : 'Salario Básico mensual (Ejm: 2.500.000)'
+      campos_buscar:
+        "Nombre Completo del Empleado" : "NOMBRE COMPLETO EMPLEADO"
+        "Nombre empleado": "NOMBRE EMPLEADO"
+        "Ciudad" : "CIUDAD DE TRABAJO"
+        "Documento de identidad líder" : "CEDULA_LIDER"
+        "Documento de identidad" : CEDULA
+        "Fecha_antiguedad": FECHA ANTIGÜEDAD
+      contiene_tablas: "No"
+
+
+
 
 
 

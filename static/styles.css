@@ -1,4 +1,3 @@
-/* styles.css */
 body {
     background: #f5faf3 !important;
     font-family: 'Inter', system-ui, sans-serif !important;
@@ -27,15 +26,7 @@ body {
     transform: scale(1.4);
 }
 
-/* 🖍️ Bordes internos resaltados en selectores y tablas
-.stSelectbox, .stDataFrame, [data-testid="stTextInput"] {
-    border: 2px solid #206a44 !important;
-    border-radius: 6px !important;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) !important;
-    padding: 5px !important;
-}*/
-
-/* 🌟 Destacar las celdas internas con un sutil borde dorado */
+/* 🌟 Destacar las celdas internas con un sutil borde */
 .stDataFrame td, .stTable td {
     border: 1px solid #0a0a09 !important;
 }
@@ -70,21 +61,32 @@ body {
     box-shadow: 0 4px 12px rgba(181, 196, 40, 0.4) !important;
 }
 
-
 /* ✨ Efecto hover en tablas */
 .stMarkdown tr:hover td {
     background: #e0ffd1 !important;
 }
 
-/* 🖼️ Marco moderno con fondo translúcido */
+/* 🖼️ Marco moderno con fondo translúcido — excluyendo el header (.hdr) */
+/* NO toques contenedores globales */
 .stApp > div:not([data-testid="stSidebar"]) {
-    background: rgba(223, 249, 234, 0.9) !important;
-    backdrop-filter: blur(10px) !important;
-    border-radius: 15px !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
-    margin: 1.5rem !important;
-    padding: 2rem !important;
+  background: transparent !important;
+  background-color: #f0fbf5 !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  backdrop-filter: none !important;
 }
+
+/* Aplica el “marco” SOLO al contenido principal */
+[data-testid="stAppViewContainer"] > .main > div.block-container {
+  background: rgba(223, 249, 234, 0.9) !important;
+  backdrop-filter: blur(10px) !important;
+  border-radius: 15px !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,.1) !important;
+  margin: 1.5rem !important;
+  padding: 2rem !important;
+}
+
 
 /* 📌 Títulos con un estilo más estilizado */
 h1 {
@@ -97,7 +99,7 @@ h1 {
     text-shadow: 2px 2px 4px rgba(0,0,0,0.1) !important;
 }
 
-/* ✅ Nuevos ajustes de espaciado (agregados al final) */
+/* ✅ Nuevos ajustes de espaciado */
 .stApp > div[data-testid="stVerticalBlock"] > div:first-child {
     padding-top: 0.5rem !important;
 }

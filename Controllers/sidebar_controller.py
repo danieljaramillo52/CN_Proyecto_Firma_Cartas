@@ -25,7 +25,7 @@ class ControladorBarraLateral:
         if "formatos_cartas" not in st.session_state:
             from docx import Document
             dict_cartas = {
-                cada_archivo: Document(f"Controllers/{cada_archivo}")
+                cada_archivo: Document(f"Insumos\\formatos_cartas\\{cada_archivo}")
                 for cada_archivo in self.config_lv["list_formatos_cartas"]
             }
             ui_comp.set_key_ss_st("formatos_cartas", dict_cartas)

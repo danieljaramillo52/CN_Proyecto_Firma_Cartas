@@ -1,1 +1,0 @@
-# Módulo principal del proyecto.

@@ -898,3 +898,5 @@ def concatenar_columnas_pd(
     except Exception as e:
         logger.critical(f"Error inesperado al concatenar columnas: {e}")
         return None
+    
+
