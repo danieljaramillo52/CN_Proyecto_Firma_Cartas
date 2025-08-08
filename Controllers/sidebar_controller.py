@@ -21,34 +21,17 @@ class ControladorBarraLateral:
         """
         st.sidebar.divider()
 
-        # Configuración y boton para agregar un nuevo colaborador.
-
-        cnfg_btn_agregar_colab_lv = self.config_lv["seccion_buscar_colab"][
-            "btn_agregar_colab"
-        ]
-
-        btn_agregar_colab_lv = ui_comp.ButtonTracker(
-            clave=cnfg_btn_agregar_colab_lv["clave"],
-            etiqueta=cnfg_btn_agregar_colab_lv["etiqueta"],
-            usar_sidebar=False,
-        )
-        cnfg_btn_agregar_colab_lv = self.config_lv["seccion_buscar_colab"][
-            "btn_agregar_colab"
-        ]
-        from docx import Document
-
-        if "formatos_cartas" not in st.session_state.keys():
+        # Cargar plantillas si no están en sesión
+        if "formatos_cartas" not in st.session_state:
+            from docx import Document
             dict_cartas = {
-                cada_archivo: Document(cada_archivo)
-                for cada_archivo in [
-                    "Controllers/F Carta De Nivelación Salarial - Salario Variable.docx",
-                    "Controllers/F Carta De Nivelacion Salarial - Salario Integral.docx",
-                ]
+                cada_archivo: Document(f"Controllers/{cada_archivo}")
+                for cada_archivo in self.config_lv["list_formatos_cartas"]
             }
-            ui_comp.set_key_ss_st(clave="formatos_cartas", valor=dict_cartas)
+            ui_comp.set_key_ss_st("formatos_cartas", dict_cartas)
 
+        # Cargar archivo maestra
         cnfg_fileUp_maestra = self.config_lv["seccion_archivo"]["file_uploader_maestra"]
-
         gestor_maestra_per = ui_comp.FileUploaderManager(
             clave=cnfg_fileUp_maestra["clave"],
             titulo=cnfg_fileUp_maestra["titulo"],
@@ -59,86 +42,80 @@ class ControladorBarraLateral:
             icon=cnfg_fileUp_maestra["icon"],
             usar_sidebar=True,
         )
-
         maestra_personal = gestor_maestra_per.leer_archivos()
+        
+        ui_comp.set_key_ss_st("maestra_personal", maestra_personal)
 
-        ui_comp.set_key_ss_st(clave="maestra_personal", valor=maestra_personal)
+        # Obtener maestra de personal.
+        
+        # FORMATO DE CARTA (Selección temporal + confirmación)
+        st.sidebar.markdown("### Formato de carta", unsafe_allow_html=True)
 
-        # Crear lista de cedulas.
-        df_maestra = st.session_state.get("maestra_personal")
-        list_cedulas = df_maestra["CEDULA"].tolist()
-
-        # Selecionar formato.
-        ui_comp.SelectBoxManager(
-            clave="select_box_colab",
-            etiqueta="Seleecione Cedula/Código del trabajador",
-            opciones=list_cedulas,
-            placeholder="Seleccione Cedula/Código del trabajador",
-            usar_sidebar=False,
-        )
-
-        formato_seleccionado = ui_comp.SelectBoxManager(
-            clave="select_box_format",
-            etiqueta="Seleecione Cedula/Código del trabajador",
+        formato_temp = ui_comp.SelectBoxManager(
+            clave="select_box_format_temp",
+            etiqueta="Seleccione el formato de carta deseado",
             opciones=self.config_lv["list_formatos_cartas"],
-            placeholder="Formato de carta",
+            placeholder="Seleccione...",
+            usar_sidebar=True,
         )
-        ui_comp.set_key_ss_st(clave="formato_seleccionado", valor= formato_seleccionado.get_value())
-        
-        # Según el formato lanzar los campos a dígitar. 
+
+        btn_confirmar_formato = ui_comp.ButtonTracker(
+            clave="btn_confirmar_formato",
+            etiqueta="Confirmar formato",
+            usar_sidebar=True,
+        )
+
+        if btn_confirmar_formato.fue_presionado():
+            ui_comp.set_key_ss_st("formato_seleccionado", formato_temp.get_value())
+            btn_confirmar_formato.reiniciar()
+            st.sidebar.success("✅ Formato confirmado")
+
+        # Procesar ingreso de campos solo si hay formato confirmado
         dict_formatos = self.config_lv["config_formatos"]
-        
-        if btn_agregar_colab_lv.fue_presionado():
-            
-            formato =  st.session_state.get("formato_seleccionado")
-            
-            for cada_campo, cada_text in dict_formatos[formato]["campos_digitar"].items():
-                
-                # Crear un selecbox dinamico según la necesidad.
+        formato = st.session_state.get("formato_seleccionado")
+
+        if formato:
+            campos = list(dict_formatos[formato]["campos_digitar"].items())
+
+            indice = st.session_state["indice_campo"]
+
+            if indice < len(campos):
+                cada_campo, cada_text = campos[indice]
+                clave_input = f"input_campo_{cada_campo}"
+                clave_boton = f"boton_guardar_{cada_campo}"
+
+                st.sidebar.markdown("### Digite el valor indicado:", unsafe_allow_html=True)
                 input_campos = ui_comp.TextInputManager(
-                    clave=f"input_campo_{cada_campo}",
+                    clave=clave_input,
                     etiqueta=cada_text,
                     valor_por_defecto="",
                     usar_sidebar=True,
                     tipo=str,
                 )
-                valor_guardado = input_campos.get_value()
-                input_campos.reset()
+
+                boton_guardar = ui_comp.ButtonTracker(
+                    clave=clave_boton,
+                    etiqueta=f"Guardar {cada_campo}",
+                    usar_sidebar=True,
+                )
+
+                if boton_guardar.fue_presionado():
+                    valor_guardado = input_campos.get_value()
+                    st.session_state["campos_guardados"][cada_campo] = valor_guardado
+
+                    # Eliminar input del estado
+                    if clave_input in st.session_state:
+                        del st.session_state[clave_input]
+
+                    boton_guardar.reiniciar()
+                    st.session_state["indice_campo"] += 1
+                    st.rerun()
                 
-                print("Hola")
-            
-
-        # selector_colaborador = ui_comp.SelectBoxManager(
-        #    clave=cnfg_select_box_colab["clave"],
-        #    etiqueta=cnfg_select_box_colab["etiqueta"],
-        #    opciones=cnfg_select_box_colab["list_rng_dctos"],
-        #    usar_sidebar=True,
-        # )
-
-        # selector_colaborador = ui_comp.SelectBoxManager(
-        #    clave=cnfg_select_box_lv["clave"],
-        #    etiqueta=cnfg_select_box_lv["etiqueta"],
-        #    opciones=cnfg_select_box_lv["list_rng_dctos"],
-        #    usar_sidebar=True,
-        # )
-
-        # cnfg_btn_confirmar_rng_lv = self.config_lv["seccion_rango_descuento"][
-        #    "btn_confirmar_rng"
-        # ]
-        #
-        # btn_confirmar = ui_comp.ButtonTracker(
-        #    clave=cnfg_btn_confirmar_rng_lv["clave"],
-        #    etiqueta=cnfg_btn_confirmar_rng_lv["etiqueta"],
-        #    usar_sidebar=True,
-        # )
-
-        # if btn_confirmar.fue_presionado() and selector_rango.is_valid():
-        #    ui_comp.set_key_ss_st("rango_act", selector_rango.get_value())
-        #    btn_confirmar.reiniciar()
-        #    st.sidebar.success("✅ Rango confirmado")
-
-        return st.session_state.get("rango_act", "")
+            else:
+                st.sidebar.success("¡Todos los campos fueron ingresados!")
+                st.session_state["colaborador_habilitado"] = True
 
     def ejecutar_proceso_lv(self):
         """Ejecuta el proceso secuencial para la construcción de la barra lateral"""
         self._renderizar_seccion_descuentos()
+        

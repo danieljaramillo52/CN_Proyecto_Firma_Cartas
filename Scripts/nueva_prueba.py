@@ -3,32 +3,7 @@ from docx import Document
 # Cargar documento original
 
 #Documentos con reemplazos aceptables.
-doc0 = Document("Controllers/F Otrosí cambio de contrato.docx")
-doc= Document("Controllers/F Carta De Nivelacion Salarial - Salario Basico.docx")
-doc= Document("Controllers\F Carta de Nivelación Salarial - Salario Variable.docx")
 doc = Document("Controllers/F Carta de Nombramiento - Salario Basico (Sin cambio de salario).docx")
-#doc1 = Document("F Otro Si Licencia No Remunerada por Estudio.docx")
-#doc2 = Document("F Carta de Nombramiento - Salario Basico (Con cambio de salario).docx")
-
-
-reemplazos5 = {
-    "Nombre Completo del Empleado" : "Arthur Kresller",
-    "Nombre del empleado" : "Arthur Kresller",
-    "DD de MM de AAAA" : "18 de Marzo de 2025",
-    "Ciudad": "Medellin",
-    "Número de documento identidad" : "1032.233.243",
-    "Fecha de inicio licencia" : "18 de Junio de 2025", 
-    "Fecha Final de Licencia": "19 de Junio de 2025",
-    "Cargo actual del empleado": "Analista Comercial",
-    "Nombre del cargo al que pasa" : "Analista1",
-}
-tuple1=("Nombre del cargo al que pasa", input("Dígite el nombre del cargo al que pasa el empleado: "))
-tuple2=("Fecha inicio", input("Digite la fecha de inicio del empleado en el nuevo cargo: (DD de MM de AAAA) "))
-
-for cada_input in [tuple1, tuple2]:
-    reemplazos5[cada_input[0]] = cada_input[1]
-  
-print(reemplazos5)
 
 reemplazos = {
   "Nombre Completo del Empleado": "Arthur Kresler Zapata",
@@ -41,12 +16,6 @@ reemplazos = {
   "$ Salario": "$ 300000",
   "Fecha_dia_actual" : "6 de Agosto 2025",
   "Nombre del cargo al que pasa." : "Operador de Logística" 
-  # "Salario Básico" : "1.000.000",
-  # "Salario Variable" : "500.000",
-  # "Total": "1.500.000",
-  # "Salario Básico %" : "1.000.000",
-  # "Salario Variable %" : "500.000",
-  # "Total %": "100%"
 }
 
 # Reemplazos dinámicos en cualquier parte del texto.

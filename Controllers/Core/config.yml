@@ -13,10 +13,47 @@ config_lateral_var:
     - F Otrosí cambio de contrato.docx
 
   config_formatos:
+    "F Carta De Nivelacion Salarial - Salario Basico.docx":
+      campos_digitar: 
+        "Fecha_dia_actual" : "Ingrese la fecha de realización de la carta: (DD de MM de AAAA)"
+        "DD de MM de AA" : 'Fecha inicio nuevo cargo. (DD de MM de AAAA):'
+        "$ Salario" : 'Ingrese el nuevo salario del colaborador: ($ XXXXX)'
+      campos_buscar:
+        "Nombre Completo del Empleado" : "NOMBRE COMPLETO EMPLEADO"
+        "Nombre empleado": "NOMBRE EMPLEADO"
+        "Ciudad" : "CIUDAD DE TRABAJO"
+      contiene_tablas: "No"
+    "F Carta de Nivelación Salarial - Salario Variable.docx":
+      campos_digitar: 
+        "Fecha_dia_actual" : "Fecha de realización de la carta: (DD de MM de AAAA)"
+        "DD de MM de AA" : 'Fecha inicio nuevo cargo. (DD de MM de AAAA):'
+        "Salario Básico." : 'Salario base del colaborador: (Ejm: 1.000.000)'
+        "Salario Variable." : "Salario variable del colaborador: (Ejm: 500.000) "
+      campos_buscar:
+        "Nombre Completo del Empleado" : "NOMBRE COMPLETO EMPLEADO"
+        "Nombre empleado": "NOMBRE EMPLEADO"
+        "Ciudad" : "CIUDAD DE TRABAJO"
+      contiene_tablas: "Sí"
     "F Carta de Nombramiento - Salario Basico (Sin cambio de salario).docx":
       campos_digitar: 
-        "DD de MM de AA" : 'Ingrese una fecha en el formato "DD de MM de AA"'
-        "Nombre del cargo al que pasa." : 'Ingrese el nuevo cargo del colaborador: '
+        "Fecha_dia_actual" : "Fecha de realización de la carta: (DD de MM de AAAA)"
+        "DD de MM de AA" : 'Fecha inicio nuevo cargo. (DD de MM de AAAA):'
+        "Nuevo Cargo" : 'Nuevo cargo del colaborador: '
+      campos_buscar:
+        "Nombre Completo del Empleado" : "NOMBRE COMPLETO EMPLEADO"
+        "Nombre empleado": "NOMBRE EMPLEADO"
+        "Ciudad" : "CIUDAD DE TRABAJO"
+      contiene_tablas: "No"
+    "F Carta de Nombramiento - Salario Basico (Sin cambio de salario).docx":
+      campos_digitar: 
+        "Fecha_dia_actual" : "Fecha de realización de la carta: (DD de MM de AAAA)"
+        "DD de MM de AA" : 'Fecha inicio nuevo cargo. (DD de MM de AAAA):'
+        "Nuevo Cargo" : 'Nuevo cargo del colaborador: '
+      campos_buscar:
+        "Nombre Completo del Empleado" : "NOMBRE COMPLETO EMPLEADO"
+        "Nombre empleado": "NOMBRE EMPLEADO"
+        "Ciudad" : "CIUDAD DE TRABAJO"
+      contiene_tablas: "No"
 
 
 
@@ -38,34 +75,29 @@ config_lateral_var:
     select_box_colaborador:
       clave: "selector_colaboradores"
       etiqueta : "Seleccione un colaborador"
-      list_colaboradores:
-      - "5% - 10%"
-      - "10% - 15%"
-      - "15% - 20%"
-      - "20% - 25%"
-      - "25% - 30%"
-      - "30% - 35%"
-      - "35% - 40%"
-      - "40% - 45%"
-      - "45% - 50%"
-
-
-insumos:
-  Maestra_Personal:
-    {}
-  Formatos_cartas:
-    {}
 
 
 cnf_session_keys:
   editor_df_key: "editor_df_final"
   inicializacion:
-    list_materiales:
-      valor_inicial: []
-    registro_confirmado: 
-      valor_inicial: false
-    confirmar_edicion_pendiente: 
-      valor_inicial: false
+    indice_campo:
+      valor_inicial : 0
+    text_input_cedulas:
+      valor_inicial: "sin_cedula"
+    campos_guardados:
+      valor_inicial: {}
+    colaborador_habilitado: 
+      valor_inicial: False
+    proceso_documento_habilitado:
+      valor_inicial:  False
+    nueva_incidencia:
+      valor_inicial: False
+
+  claves_preservar: 
+    - formatos_cartas
+    - maestra_personal
+    - archivo_maestra_mensaje_mostrado"
+
 
 Resultados:
   path_resultado: "Resultados\\"

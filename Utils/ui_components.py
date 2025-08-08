@@ -130,7 +130,10 @@ class TextInputManager:
         self._show_input()
 
     def _show_input(self):
-        input_func = st.sidebar.text_input if self.usar_sidebar else st.text_input
+        # Selecciona el contenedor (sidebar o cuerpo principal)
+        contenedor = st.sidebar if self.usar_sidebar else st
+
+        input_func = contenedor.text_input
 
         valor_ingresado = input_func(
             label=self.etiqueta, value=self.valor_por_defecto, key=self.clave
@@ -142,7 +145,7 @@ class TextInputManager:
             if valor_ingresado.strip():
                 st.session_state[f"{self.clave}_valido"] = True
             else:
-                st.warning("Este campo no puede estar vacío.")
+                contenedor.warning("Este campo no puede estar vacío.")
         else:
             try:
                 valor_numerico = self.tipo(valor_ingresado)
@@ -150,12 +153,12 @@ class TextInputManager:
                 if (self.minimo is not None and valor_numerico < self.minimo) or (
                     self.maximo is not None and valor_numerico > self.maximo
                 ):
-                    st.warning(self.mensaje_error)
+                    contenedor.warning(self.mensaje_error)
                 else:
                     st.session_state[f"{self.clave}_valido"] = True
             except ValueError:
                 if valor_ingresado.strip():
-                    st.warning("Debe ingresar un número válido.")
+                    contenedor.warning("Debe ingresar un número válido.")
 
     def get_value(self) -> Optional[Union[int, float, str]]:
         """
@@ -193,7 +196,6 @@ class TextInputManager:
         """
         st.session_state[f"{self.clave}_reset"] = True
 
-    
 
 class MultiVisibilityController:
     """
@@ -286,9 +288,7 @@ class MultiVisibilityController:
 
 @st.cache_data
 def leer_archivo_cacheado(
-    bytes_archivo: bytes,
-    tipo: str,
-    usecols=None
+    bytes_archivo: bytes, tipo: str, usecols=None
 ) -> pd.DataFrame:
     """
     Carga un archivo en memoria desde su contenido en bytes y lo transforma en un objeto de pandas o python-docx.
@@ -311,7 +311,9 @@ def leer_archivo_cacheado(
     Notes:
         Utiliza BytesIO para convertir los bytes en un buffer de archivo en memoria, compatible con pandas y python-docx.
     """
-    buffer = BytesIO(bytes_archivo)  # Convierte los bytes en un archivo virtual en memoria (tipo archivo)
+    buffer = BytesIO(
+        bytes_archivo
+    )  # Convierte los bytes en un archivo virtual en memoria (tipo archivo)
 
     if tipo == "csv":
         return pd.read_csv(buffer)
@@ -321,7 +323,6 @@ def leer_archivo_cacheado(
         return Document(buffer)
     else:
         return pd.DataFrame()
-
 
 
 class FileUploaderManager:
@@ -413,7 +414,7 @@ class FileUploaderManager:
                     raise ValueError("Archivo sin nombre válido")
 
                 tipo = nombre.split(".")[-1].lower()
-                
+
                 # Lee los bytes del archivo para pasarlos al método respectivo.
                 bytes_archivo = archivo.read()
 
@@ -427,8 +428,12 @@ class FileUploaderManager:
             except Exception as e:
                 nombre = getattr(archivo, "name", "Archivo desconocido")
                 st.error(f"❌ Error leyendo {nombre}: {e}")
-        
-        return archivos[0] if len(archivos) == 1 else archivos
+
+        if len(archivos) == 0:
+            return pd.DataFrame()
+        if len(archivos) == 1:
+            return archivos[0]
+        return pd.concat(archivos, ignore_index=True)
 
     def reset(self) -> None:
         st.session_state[f"{self.clave}_reset"] = True

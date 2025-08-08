@@ -849,51 +849,52 @@ def Filtrar_df_dict_clave_valor(df, filtros):
                 mask &= df[columna] == valores
         return df[mask]
 
-def Cambiar_tipo_dato_multiples_columnas_pd(
-    base: pd.DataFrame, list_columns: list, type_data: type
+def concatenar_columnas_pd(
+    dataframe: pd.DataFrame,
+    cols_elegidas: List[str],
+    nueva_columna: str,
+    sep: str = "",
+    omitir_vacios: bool = False,
 ) -> pd.DataFrame:
     """
-    Función que toma un DataFrame, una lista de sus columnas para hacer un cambio en el tipo de dato de las mismas.
-
-    Args:
-        base (pd.DataFrame): DataFrame que es la base del cambio.
-        list_columns (list): Columnas a modificar su tipo de dato.
-        type_data (type): Tipo de dato al que se cambiarán las columnas (ejemplo: str, int, float).
-
-    Returns:
-        pd.DataFrame: Copia del DataFrame con los cambios.
+    Concatena las columnas especificadas y agrega el resultado como una nueva columna.
+    
+    Parámetros:
+        dataframe: DataFrame origen.
+        cols_elegidas: Columnas a concatenar (en orden).
+        nueva_columna: Nombre de la columna de salida.
+        sep: Separador entre valores concatenados (por defecto: "").
+        omitir_vacios: Si True, no inserta separador para valores vacíos/NaN.
     """
     try:
-        # Verificar que el DataFrame tenga las columnas especificadas
-        for columna in list_columns:
-            if columna not in base.columns:
-                raise KeyError(f"La columna '{columna}' no existe en el DataFrame.")
+        if not isinstance(dataframe, pd.DataFrame):
+            raise TypeError("El argumento 'dataframe' debe ser un DataFrame de pandas.")
 
-        # Cambiar el tipo de dato de las columnas
-        base_copy = (
-            base.copy()
-        )  # Crear una copia para evitar problemas de SettingWithCopyWarning
-        base_copy[list_columns] = base_copy[list_columns].astype(type_data)
+        faltantes = [c for c in cols_elegidas if c not in dataframe.columns]
+        if faltantes:
+            raise KeyError(f"Columnas inexistentes: {', '.join(faltantes)}")
 
-        return base_copy
+        df = dataframe.copy()
+
+        if omitir_vacios:
+            # Convierte a str, quita NaN -> "", y une solo los que no están vacíos
+            df[nueva_columna] = (
+                df[cols_elegidas]
+                .astype(str)
+                .fillna("")
+                .agg(lambda row: sep.join([v for v in row if v != ""]), axis=1)
+            )
+        else:
+            # Junta tal cual, respetando posiciones (vacíos generan separadores consecutivos)
+            df[nueva_columna] = (
+                df[cols_elegidas].astype(str).fillna("").agg(sep.join, axis=1)
+            )
+
+        logger.info(
+            f"Columnas '{', '.join(cols_elegidas)}' concatenadas en '{nueva_columna}' con sep='{sep}' (omitir_vacios={omitir_vacios})."
+        )
+        return df
 
     except Exception as e:
-        logger.critical(f"Error en Cambiar_tipo_dato_multiples_columnas: {e}")
-
-
-def formatear_fecha(fecha_dict):
-    if not isinstance(fecha_dict, dict):
-        return {}
-    return {
-        "fecha_inicio": (
-            fecha_dict.get("fecha_inicio").strftime("%Y-%m-%d")
-            if isinstance(fecha_dict.get("fecha_inicio"), date)
-            else ""
-        ),
-        "fecha_fin": (
-            fecha_dict.get("fecha_fin").strftime("%Y-%m-%d")
-            if isinstance(fecha_dict.get("fecha_fin"), date)
-            else ""
-        ),
-        "mes": fecha_dict.get("mes", ""),
-    }
+        logger.critical(f"Error inesperado al concatenar columnas: {e}")
+        return None
