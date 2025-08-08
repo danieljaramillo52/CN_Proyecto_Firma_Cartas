@@ -2,14 +2,13 @@ from pathlib import Path
 import win32com.client as win32
 
 # correr la macro que corrige los formatos. 
-def ejecutar_macro_en_word(ruta_relativa: str, nombre_macro: str, incluir_subcarpetas: bool = False) -> dict:
+def ejecutar_macro_en_word(ruta_relativa: str = "Resultados\\", nombre_macro : str = "Normal.ThisDocument.ResaltarPalabrasEnNegrita", incluir_subcarpetas: bool = False) -> dict:
     """
     Ejecuta una macro de Word sobre todos los .docx de una carpeta.
 
     Parámetros:
-        ruta_relativa     : Ruta relativa a la carpeta con .docx (respecto a cwd del proceso).
-        nombre_macro      : Nombre completo de la macro, p.ej. "Normal.ResaltarPalabrasEnNegrita"
-                            o "Normal.Module1.ResaltarPalabrasEnNegrita".
+        ruta_relativa : Ruta relativa a la carpeta con .docx (respecto a cwd del proceso).
+        nombre_macro : Nombre completo de la macro, p.ej. "Normal.ResaltarPalabrasEnNegrita" o "Normal.Module1.ResaltarPalabrasEnNegrita".
         incluir_subcarpetas: Si True, procesa también subcarpetas.
 
     Retorna:
@@ -49,6 +48,4 @@ def ejecutar_macro_en_word(ruta_relativa: str, nombre_macro: str, incluir_subcar
 
     return {"procesados": procesados, "fallidos": fallidos}
 
-ruta_rel =  "Resultados\\"
-macro = "Normal.ThisDocument.ResaltarPalabrasEnNegrita"
-res = ejecutar_macro_en_word(ruta_rel, macro, incluir_subcarpetas=False)
+res = ejecutar_macro_en_word()

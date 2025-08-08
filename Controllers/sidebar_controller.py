@@ -74,47 +74,51 @@ class ControladorBarraLateral:
         dict_formatos = self.config_lv["config_formatos"]
         formato = st.session_state.get("formato_seleccionado")
 
-        if formato:
-            campos = list(dict_formatos[formato]["campos_digitar"].items())
+        if formato not in self.config_lv["formatos_sin_digitación"]:
+            if formato :
+                campos = list(dict_formatos[formato]["campos_digitar"].items())
 
-            indice = st.session_state["indice_campo"]
+                indice = st.session_state["indice_campo"]
 
-            if indice < len(campos):
-                cada_campo, cada_text = campos[indice]
-                clave_input = f"input_campo_{cada_campo}"
-                clave_boton = f"boton_guardar_{cada_campo}"
+                if indice < len(campos):
+                    cada_campo, cada_text = campos[indice]
+                    clave_input = f"input_campo_{cada_campo}"
+                    clave_boton = f"boton_guardar_{cada_campo}"
 
-                st.sidebar.markdown("### Digite el valor indicado:", unsafe_allow_html=True)
-                input_campos = ui_comp.TextInputManager(
-                    clave=clave_input,
-                    etiqueta=cada_text,
-                    valor_por_defecto="",
-                    usar_sidebar=True,
-                    tipo=str,
-                )
+                    st.sidebar.markdown("### Digite el valor indicado:", unsafe_allow_html=True)
+                    input_campos = ui_comp.TextInputManager(
+                        clave=clave_input,
+                        etiqueta=cada_text,
+                        valor_por_defecto="",
+                        usar_sidebar=True,
+                        tipo=str,
+                    )
 
-                boton_guardar = ui_comp.ButtonTracker(
-                    clave=clave_boton,
-                    etiqueta=f"Guardar {cada_campo}",
-                    usar_sidebar=True,
-                )
+                    boton_guardar = ui_comp.ButtonTracker(
+                        clave=clave_boton,
+                        etiqueta=f"Guardar {cada_campo}",
+                        usar_sidebar=True,
+                    )
 
-                if boton_guardar.fue_presionado():
-                    valor_guardado = input_campos.get_value()
-                    st.session_state["campos_guardados"][cada_campo] = valor_guardado
+                    if boton_guardar.fue_presionado():
+                        valor_guardado = input_campos.get_value()
+                        st.session_state["campos_guardados"][cada_campo] = valor_guardado
 
-                    # Eliminar input del estado
-                    if clave_input in st.session_state:
-                        del st.session_state[clave_input]
+                        # Eliminar input del estado
+                        if clave_input in st.session_state:
+                            del st.session_state[clave_input]
 
-                    boton_guardar.reiniciar()
-                    st.session_state["indice_campo"] += 1
-                    st.rerun()
-                
-            else:
-                st.sidebar.success("¡Todos los campos fueron ingresados!")
-                st.session_state["colaborador_habilitado"] = True
-
+                        boton_guardar.reiniciar()
+                        st.session_state["indice_campo"] += 1
+                        st.rerun()
+                    
+                else:
+                    st.sidebar.success("¡Todos los campos fueron ingresados!")
+                    st.session_state["colaborador_habilitado"] = True
+        else:
+            st.sidebar.success("Este formato no requiere digitar campos.")
+            st.session_state["colaborador_habilitado"] = True
+            
     def ejecutar_proceso_lv(self):
         """Ejecuta el proceso secuencial para la construcción de la barra lateral"""
         self._renderizar_seccion_descuentos()

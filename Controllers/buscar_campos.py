@@ -1,5 +1,6 @@
 # Controllers/buscador_campos.py
 import streamlit as st
+from pandas import to_datetime
 from Utils.utils import concatenar_columnas_pd
 from Utils.ui_components import SelectBoxManager, ButtonTracker
 
@@ -17,6 +18,12 @@ def buscar_y_agregar_colaborador_por_cedula(df_maestra, config_lv):
                 df_maestra = concatenar_columnas_pd(dataframe=df_maestra, cols_elegidas=["NOMBRE", "PRIMER APELLIDO"], nueva_columna= "NOMBRE EMPLEADO",omitir_vacios=True, sep=" ")
                 
                 df_maestra = concatenar_columnas_pd(dataframe=df_maestra, cols_elegidas=["CEDULA", "NOMBRE EMPLEADO"],nueva_columna="Concatenada", omitir_vacios=True, sep="_")
+                
+                # REVISAR
+                df_maestra['FECHA ANTIGÜEDAD'] = to_datetime(df_maestra['FECHA ANTIGÜEDAD'],errors='coerce', dayfirst=True,format="mixed")
+
+                # Crear nueva columna con formato "día de mes de año"
+                df_maestra['FECHA_ANTIGUEDAD_FORMATEADA'] = df_maestra['FECHA ANTIGÜEDAD'].dt.strftime('%d de %B de %Y')
                 
                 input_cedula = SelectBoxManager(
                     clave="text_input_cedula",

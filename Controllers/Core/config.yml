@@ -12,6 +12,10 @@ config_lateral_var:
     - F Cartas de Nombramiento Salario Variable.docx
     - F Carta de Nombramiento - Salario Basico (Sin cambio de salario).docx
     - F Otrosí cambio de contrato.docx
+    - F Otro Si Licencia No Remunerada por Estudio.docx
+  
+  formatos_sin_digitación:
+    - F Otrosí cambio de contrato.docx
 
   config_formatos:
     "F Carta De Nivelacion Salarial - Salario Basico.docx":
@@ -81,8 +85,26 @@ config_lateral_var:
         "Ciudad" : "CIUDAD DE TRABAJO"
         "Documento de identidad líder" : "CEDULA_LIDER"
         "Documento de identidad" : CEDULA
-        "Fecha_antiguedad": FECHA ANTIGÜEDAD
+        "Fecha_antiguedad": "FECHA_ANTIGUEDAD_FORMATEADA"
       contiene_tablas: "No"
+    "F Otro Si Licencia No Remunerada por Estudio.docx":
+      campos_digitar: 
+        "Fecha de inicio licencia": "Fecha de inicio de la licencia: (DD de Mes de AAAA)"
+        "Fecha Final de Licencia" : "Fecha de fin de la licencia: (DD de Mes de AAAA)" 
+      campos_buscar:
+        "Nombre Completo del Empleado" : "NOMBRE COMPLETO EMPLEADO"
+        "Nombre empleado": "NOMBRE EMPLEADO"
+        "Documento de identidad" : CEDULA
+      contiene_tablas: "No"
+    "F Otrosí cambio de contrato.docx":
+      campos_buscar:
+        "Nombre Completo del Empleado" : "NOMBRE COMPLETO EMPLEADO"
+        "Nombre empleado": "NOMBRE EMPLEADO"
+        "Documento de identidad" : CEDULA
+        "Fecha_antiguedad": FECHA_ANTIGUEDAD_FORMATEADA
+        "Cargo actual del empleado" : "CARGO"
+      contiene_tablas: "No"
+
 
 
 
