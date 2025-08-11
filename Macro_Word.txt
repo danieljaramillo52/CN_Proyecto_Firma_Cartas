@@ -8,7 +8,7 @@ Sub ResaltarPalabrasEnNegrita()
     palabras = Array( _
     "Primera.", "Segunda.", "EMPLEADO", "EMPLEADOR", "MEDELLIN", _
     "COMERCIAL NUTRESA", "Salario Básico:", "Salario Variable:", _
-    "Fecha_dia_actual")
+    "LA EMPLEADORA", "Fecha_dia_actual")
     ' Recorrer cada palabra
     For Each palabra In palabras
         Set rango = ActiveDocument.Content
@@ -28,3 +28,5 @@ Sub ResaltarPalabrasEnNegrita()
     Next palabra
     
 End Sub
+
+

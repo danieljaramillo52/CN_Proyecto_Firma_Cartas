@@ -13,6 +13,9 @@ config_lateral_var:
     - F Carta de Nombramiento - Salario Basico (Sin cambio de salario).docx
     - F Otrosí cambio de contrato.docx
     - F Otro Si Licencia No Remunerada por Estudio.docx
+    - F Otrosi de Traslados con Bonificación.docx
+    - F Otrosi de Traslados Sin Bonificación.docx
+    - F Otrosi de cambio Salario Variable a Fijo.docx
   
   formatos_sin_digitación:
     - F Otrosí cambio de contrato.docx
@@ -22,7 +25,7 @@ config_lateral_var:
       campos_digitar: 
         "Fecha_dia_actual" : "Ingrese la fecha de realización de la carta: (DD de MM de AAAA)"
         "DD de MM de AA" : 'Fecha inicio nuevo cargo. (DD de MM de AAAA):'
-        "$ Salario" : 'Nuevo salario del colaborador (Ejm: 2.500.000)'
+        "$ Salario" : 'Nuevo salario del colaborador (Ejm: $2.500.000)'
       campos_buscar:
         "Nombre Completo del Empleado" : "NOMBRE COMPLETO EMPLEADO"
         "Nombre empleado": "NOMBRE EMPLEADO"
@@ -66,8 +69,8 @@ config_lateral_var:
         "Fecha_dia_actual" : "Fecha de realización de la carta: (DD de MM de AAAA)"
         "DD de MM de AA" : 'Fecha inicio nuevo salario. (DD de MM de AAAA):'
         "Nuevo Cargo" : 'Nuevo cargo del colaborador: '
-        "Salario Básico." : 'Salario base del colaborador: (Ejm: 1.000.000)'
-        "Salario Variable." : "Salario variable del colaborador: (Ejm: 500.000) "
+        "Salario Básico." : 'Salario base del colaborador: (Ejm: $ 1.000.000)'
+        "Salario Variable." : "Salario variable del colaborador: (Ejm: $ 500.000) "
       campos_buscar:
         "Nombre Completo del Empleado" : "NOMBRE COMPLETO EMPLEADO"
         "Nombre empleado": "NOMBRE EMPLEADO"
@@ -104,11 +107,45 @@ config_lateral_var:
         "Fecha_antiguedad": FECHA_ANTIGUEDAD_FORMATEADA
         "Cargo actual del empleado" : "CARGO"
       contiene_tablas: "No"
-
-
-
-
-
+    "F Otrosi de Traslados con Bonificación.docx":
+      campos_digitar:
+        "LUGAR DE DESTINO" : "Nuevo lugar de trabajo del empleado (Ciudad)"
+        "DD de MM de AA" : 'Fecha inicio nueva sede laboral. (DD de MM de AAAA):'
+        "$ Salario " : "Ingrese la bonificación por traslado (Ejm: $ 200.000)"
+      campos_buscar:
+        "Nombre Completo del Empleado" : "NOMBRE COMPLETO EMPLEADO"
+        "Nombre empleado": "NOMBRE EMPLEADO"
+        "LUGAR DE ORIGEN" : "CIUDAD DE TRABAJO"
+        "Documento de identidad" : CEDULA
+        "Fecha_antiguedad": FECHA_ANTIGUEDAD_FORMATEADA
+        "Cargo actual del empleado" : "CARGO"
+      contiene_tablas: "No"
+    "F Otrosi de Traslados Sin Bonificación.docx":
+      campos_digitar:
+        "LUGAR DE DESTINO" : "Nuevo lugar de trabajo del empleado (Ciudad)"
+        "DD de MM de AA" : 'Fecha inicio nueva sede laboral. (DD de MM de AAAA):'
+        "$ Salario " : "Ingrese la bonificación por traslado (Ejm: $ 200.000)"
+      campos_buscar:
+        "Nombre Completo del Empleado" : "NOMBRE COMPLETO EMPLEADO"
+        "Nombre empleado": "NOMBRE EMPLEADO"
+        "LUGAR DE ORIGEN" : "CIUDAD DE TRABAJO"
+        "Documento de identidad" : CEDULA
+        "Fecha_antiguedad": FECHA_ANTIGUEDAD_FORMATEADA
+        "Cargo actual del empleado" : "CARGO"
+      contiene_tablas: "No"
+    "F Otrosi de cambio Salario Variable a Fijo.docx":
+      campos_digitar:
+        "LUGAR DE DESTINO" : "Nuevo lugar de trabajo del empleado (Ciudad)"
+        "DD de MM de AA" : 'Fecha inicio nueva sede laboral. (DD de MM de AAAA):'
+        "$ Salario " : "Ingrese la bonificación por traslado (Ejm: $ 200.000)"
+      campos_buscar:
+        "Nombre Completo del Empleado" : "NOMBRE COMPLETO EMPLEADO"
+        "Nombre empleado": "NOMBRE EMPLEADO"
+        "LUGAR DE ORIGEN" : "CIUDAD DE TRABAJO"
+        "Documento de identidad" : CEDULA
+        "Fecha_antiguedad": FECHA_ANTIGUEDAD_FORMATEADA
+        "Cargo actual del empleado" : "CARGO"
+      contiene_tablas: "No"
 
 
   seccion_archivo:

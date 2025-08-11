@@ -1,4 +1,6 @@
 # Controllers/buscador_campos.py
+
+import locale #ignorar.
 import streamlit as st
 from pandas import to_datetime
 from Utils.utils import concatenar_columnas_pd
@@ -21,7 +23,9 @@ def buscar_y_agregar_colaborador_por_cedula(df_maestra, config_lv):
                 
                 # REVISAR
                 df_maestra['FECHA ANTIGÜEDAD'] = to_datetime(df_maestra['FECHA ANTIGÜEDAD'],errors='coerce', dayfirst=True,format="mixed")
-
+                
+                #Configurar formato lenguaje de fecha. 
+                locale.setlocale(locale.LC_TIME, 'Spanish_Spain')
                 # Crear nueva columna con formato "día de mes de año"
                 df_maestra['FECHA_ANTIGUEDAD_FORMATEADA'] = df_maestra['FECHA ANTIGÜEDAD'].dt.strftime('%d de %B de %Y')
                 
