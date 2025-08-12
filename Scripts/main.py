@@ -38,7 +38,7 @@ class Aplicacion:
         df_maestra = st.session_state.get("maestra_personal", pd.DataFrame())
     
         buscar_y_agregar_colaborador_por_cedula(
-            df_maestra, self.get_config("config_lateral_var")
+            df_maestra, self.get_config("config_lateral_var"), self.get_config("dict_cols")
             )
 
         # Botón para procesar el formato seleccionado

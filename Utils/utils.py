@@ -1,15 +1,18 @@
 import pandas as pd
 import os
-import numpy as np
-import streamlit as st
-from loguru import logger
-from typing import List, Union, Literal
 import yaml
 import requests
-from io import BytesIO
-from datetime import date
+import numpy as np
+import streamlit as st
 import re
+import base64
+import threading
+from datetime import date # advertencia a modulos nativos. Por sobreescribir los del entorno virtual.
+from io import BytesIO
+from typing import List, Union, Literal
+from loguru import logger
 from PIL import Image
+
 from Scripts.config_path_routes import ConfigPathRoutes
 
 
@@ -215,9 +218,6 @@ def load_css(file_name):
         st.error(f"Error al cargar el CSS: {e}")
 
 
-import base64
-from io import BytesIO
-
 
 def image_to_base64(image):
     """Convierte una imagen PIL a base64 para HTML inline"""
@@ -246,7 +246,7 @@ def setup_ui():
                 <tr>
                     <td style="text-align: left;">
                         <h1 style="margin: 0; font-size: 2.5em; color: ##9bb80b;">
-                            Cálculo descuentos éxito
+                            Generación cartas CN
                         </h1>
                     </td>
                     <td style="text-align: right; vertical-align: middle;">
@@ -899,4 +899,6 @@ def concatenar_columnas_pd(
         logger.critical(f"Error inesperado al concatenar columnas: {e}")
         return None
     
+
+
 

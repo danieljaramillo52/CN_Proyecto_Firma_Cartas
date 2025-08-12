@@ -1,0 +1,3 @@
+Resultados actuales de cartas diligenciadas. 
+
+Una vez terminado el proceso con la aplicación utilizar el archivo ejecutar_macro.bat y presionar doble click para ajustar formatos.

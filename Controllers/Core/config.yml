@@ -16,6 +16,8 @@ config_lateral_var:
     - F Otrosi de Traslados con Bonificación.docx
     - F Otrosi de Traslados Sin Bonificación.docx
     - F Otrosi de cambio Salario Variable a Fijo.docx
+    - F Formalización de APL en Cargo.docx
+    - F Otrosi Cambio Salario Fijo a Variable.docx
   
   formatos_sin_digitación:
     - F Otrosí cambio de contrato.docx
@@ -23,8 +25,8 @@ config_lateral_var:
   config_formatos:
     "F Carta De Nivelacion Salarial - Salario Basico.docx":
       campos_digitar: 
-        "Fecha_dia_actual" : "Ingrese la fecha de realización de la carta: (DD de MM de AAAA)"
-        "DD de MM de AA" : 'Fecha inicio nuevo cargo. (DD de MM de AAAA):'
+        "Fecha_dia_actual" : "Fecha de realización de la carta: (DD de Mes de AAAA)"
+        "DD de MM de AA" : 'Fecha inicio nuevo cargo. (DD de Mes de AAAA):'
         "$ Salario" : 'Nuevo salario del colaborador (Ejm: $2.500.000)'
       campos_buscar:
         "Nombre Completo del Empleado" : "NOMBRE COMPLETO EMPLEADO"
@@ -33,8 +35,8 @@ config_lateral_var:
       contiene_tablas: "No"
     "F Carta de Nivelación Salarial - Salario Variable.docx":
       campos_digitar: 
-        "Fecha_dia_actual" : "Fecha de realización de la carta: (DD de MM de AAAA)"
-        "DD de MM de AA" : 'Fecha inicio nuevo cargo. (DD de MM de AAAA):'
+        "Fecha_dia_actual" : "Fecha de realización de la carta: (DD de Mes de AAAA)"
+        "DD de MM de AA" : 'Fecha inicio nuevo cargo. (DD de Mes de AAAA):'
         "Salario Básico." : 'Salario base del colaborador: (Ejm: 1.000.000)'
         "Salario Variable." : "Salario variable del colaborador: (Ejm: 500.000) "
       campos_buscar:
@@ -44,8 +46,8 @@ config_lateral_var:
       contiene_tablas: "Sí"
     "F Carta de Nombramiento - Salario Basico (Sin cambio de salario).docx":
       campos_digitar: 
-        "Fecha_dia_actual" : "Fecha de realización de la carta: (DD de MM de AAAA)"
-        "DD de MM de AA" : 'Fecha inicio nuevo cargo. (DD de MM de AAAA):'
+        "Fecha_dia_actual" : "Fecha de realización de la carta: (DD de Mes de AAAA)"
+        "DD de MM de AA" : 'Fecha inicio nuevo cargo. (DD de Mes de AAAA):'
         "Nuevo Cargo" : 'Nuevo cargo del colaborador: '
       campos_buscar:
         "Nombre Completo del Empleado" : "NOMBRE COMPLETO EMPLEADO"
@@ -54,8 +56,8 @@ config_lateral_var:
       contiene_tablas: "No"
     "F Carta De Nivelacion Salarial - Salario Integral.docx":
       campos_digitar: 
-        "Fecha_dia_actual" : "Fecha de realización de la carta: (DD de MM de AAAA)"
-        "DD de MM de AA" : 'Fecha inicio nuevo salario. (DD de MM de AAAA):'
+        "Fecha_dia_actual" : "Fecha de realización de la carta: (DD de Mes de AAAA)"
+        "DD de MM de AA" : 'Fecha inicio nuevo salario. (DD de Mes de AAAA):'
         "Nombre del cargo": "Cargo del empleado."
         "$ Salario" : 'Nuevo salario del colaborador (Ejm: 2.500.000)'
         "Num_horas_semanales" : "Horas semanales de trabajo (Ejm: 45 Of entrar / 47 Region)"
@@ -66,8 +68,8 @@ config_lateral_var:
       contiene_tablas: "No"
     "F Cartas de Nombramiento Salario Variable.docx":
       campos_digitar: 
-        "Fecha_dia_actual" : "Fecha de realización de la carta: (DD de MM de AAAA)"
-        "DD de MM de AA" : 'Fecha inicio nuevo salario. (DD de MM de AAAA):'
+        "Fecha_dia_actual" : "Fecha de realización de la carta: (DD de Mes de AAAA)"
+        "DD de MM de AA" : 'Fecha inicio nuevo salario. (DD de Mes de AAAA):'
         "Nuevo Cargo" : 'Nuevo cargo del colaborador: '
         "Salario Básico." : 'Salario base del colaborador: (Ejm: $ 1.000.000)'
         "Salario Variable." : "Salario variable del colaborador: (Ejm: $ 500.000) "
@@ -78,10 +80,10 @@ config_lateral_var:
       contiene_tablas: "Sí"
     "F Formalización de APL en Cargo.docx":
       campos_digitar: 
-        "Fecha_dia_actual" : "Fecha de realización de la carta: (DD de MM de AAAA)"
-        "DD de MM de AA" : 'Fecha inicio nuevo salario. (DD de MM de AAAA):'
-        "Nuevo Cargo" : 'Nuevo cargo del colaborador: '
-        "$ Salario" : 'Salario Básico mensual (Ejm: 2.500.000)'
+        "Fecha_dia_actual" : "Fecha de realización de la carta: (DD de Mes de AAAA)"
+        "DD de MM de AA" : 'Fecha inicio nuevo salario. (DD de Mes de AAAA):'
+        "Nuevo Cargo" : 'Nuevo cargo del colaborador:'
+        "$ Salario" : 'Salario Básico mensual (Ejm: $ 2.500.000)'
       campos_buscar:
         "Nombre Completo del Empleado" : "NOMBRE COMPLETO EMPLEADO"
         "Nombre empleado": "NOMBRE EMPLEADO"
@@ -110,7 +112,7 @@ config_lateral_var:
     "F Otrosi de Traslados con Bonificación.docx":
       campos_digitar:
         "LUGAR DE DESTINO" : "Nuevo lugar de trabajo del empleado (Ciudad)"
-        "DD de MM de AA" : 'Fecha inicio nueva sede laboral. (DD de MM de AAAA):'
+        "DD de MM de AA" : 'Fecha inicio nueva sede laboral. (DD de Mes de AAAA):'
         "$ Salario " : "Ingrese la bonificación por traslado (Ejm: $ 200.000)"
       campos_buscar:
         "Nombre Completo del Empleado" : "NOMBRE COMPLETO EMPLEADO"
@@ -123,7 +125,7 @@ config_lateral_var:
     "F Otrosi de Traslados Sin Bonificación.docx":
       campos_digitar:
         "LUGAR DE DESTINO" : "Nuevo lugar de trabajo del empleado (Ciudad)"
-        "DD de MM de AA" : 'Fecha inicio nueva sede laboral. (DD de MM de AAAA):'
+        "DD de MM de AA" : 'Fecha inicio nueva sede laboral. (DD de Mes de AAAA):'
         "$ Salario " : "Ingrese la bonificación por traslado (Ejm: $ 200.000)"
       campos_buscar:
         "Nombre Completo del Empleado" : "NOMBRE COMPLETO EMPLEADO"
@@ -135,13 +137,27 @@ config_lateral_var:
       contiene_tablas: "No"
     "F Otrosi de cambio Salario Variable a Fijo.docx":
       campos_digitar:
-        "LUGAR DE DESTINO" : "Nuevo lugar de trabajo del empleado (Ciudad)"
-        "DD de MM de AA" : 'Fecha inicio nueva sede laboral. (DD de MM de AAAA):'
-        "$ Salario " : "Ingrese la bonificación por traslado (Ejm: $ 200.000)"
+        "Fecha_dia_actual" : "Fecha de realización de la carta: (DD de Mes de AAAA)"
+        "Fecha_nuevo_salario" : 'Fecha inicio nuevo salario. (DD de Mes de AAAA):'
+        "$ Salario Básico." : 'Salario base del colaborador: (Ejm: $ 1.000.000)'
+        "$ Salario Variable." : "Salario variable del colaborador: (Ejm: $ 500.000) "
+        "Nuevo salario total": "Nuevo salario total fijo del colaborador: (Ejm: $ 3.000.000)"
       campos_buscar:
         "Nombre Completo del Empleado" : "NOMBRE COMPLETO EMPLEADO"
-        "Nombre empleado": "NOMBRE EMPLEADO"
-        "LUGAR DE ORIGEN" : "CIUDAD DE TRABAJO"
+        "Documento de identidad" : CEDULA
+        "Fecha_antiguedad": FECHA_ANTIGUEDAD_FORMATEADA
+        "Cargo actual del empleado" : "CARGO"
+      contiene_tablas: "No"
+    "F Otrosi Cambio Salario Fijo a Variable.docx":
+      campos_digitar:
+        "Fecha_dia_actual" : "Fecha de realización de la carta: (DD de Mes de AAAA)"
+        "Fecha_nuevo_salario" : 'Fecha inicio nuevo salario. (DD de Mes de AAAA):'
+        "CARGO NUEVO" : "Nuevo cargo del empleado."
+        "$ Salario actual" : "Salario actual del colaborador: (Ejm: $ 1.000.000)"
+        "$ Salario Fijo": "Nuevo salario fijo colaborador Ejm: ($ 1.000.000)"
+        "$ Salario Variable" : "Nuevo salario variable del colaborador. Ejm: ($ 500.000)"
+      campos_buscar:
+        "Nombre Completo del Empleado" : "NOMBRE COMPLETO EMPLEADO"
         "Documento de identidad" : CEDULA
         "Fecha_antiguedad": FECHA_ANTIGUEDAD_FORMATEADA
         "Cargo actual del empleado" : "CARGO"
@@ -193,16 +209,16 @@ cnf_session_keys:
 Resultados:
   path_resultado: "Resultados\\"
 
-dict_cols: 
-  "Sociedad": "Sociedad"
-  "Cta.alternativa": "Cta.alternativa"
-  "Nº cuenta": "Nº cuenta"
-  "Texto p.posición balance/PyG": "Texto p.posición balance/PyG"
-  "TotPerInf": "TotPerInf"
-  "TotPerComp": "TotPerComp"
-  "Desv.abs.": "Desv.abs."
-  "Mon.": "Mon."
-  "agrupador_base" : "agrupador_base"
-  "x" : "x"
-  "y" : "y"
-  "descripcion_cuenta" : "descripcion_cuenta"
+dict_cols : {
+  "NOMBRE": "NOMBRE",
+  "PRIMER_APELLIDO": "PRIMER APELLIDO",
+  "SEGUNDO_APELLIDO": "SEGUNDO APELLIDO",
+  "NOMBRE_COMPLETO_EMPLEADO": "NOMBRE COMPLETO EMPLEADO",
+  "NOMBRE_EMPLEADO": "NOMBRE EMPLEADO",
+  "CEDULA": "CEDULA",
+  "CONCATENADA": "CONCATENADA",
+  "FECHA_ANTIGUEDAD": "FECHA ANTIGÜEDAD",
+  "FECHA_INGRESO_CIA": "FECHA INGRESO A LA CIA",
+  "FECHA_ANTIGUEDAD_FORMATEADA": "FECHA_ANTIGUEDAD_FORMATEADA"
+}
+
