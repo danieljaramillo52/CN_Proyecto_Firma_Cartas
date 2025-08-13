@@ -241,7 +241,7 @@ def setup_ui():
     # Usar una tabla HTML para alinear horizontalmente texto e imagen
     st.markdown(
         f"""
-        <div style="background-color: #e8f8f5; padding: 10px 20px; border-radius: 10px;">
+        <div style="background-color: #e8f8f5; padding: 10px 20px; border-radius: 10px; autocomplete="off;">
             <table style="width: 100%; border-collapse: collapse;">
                 <tr>
                     <td style="text-align: left;">

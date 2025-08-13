@@ -59,8 +59,7 @@ config_lateral_var:
         "Fecha_dia_actual" : "Fecha de realización de la carta: (DD de Mes de AAAA)"
         "DD de MM de AA" : 'Fecha inicio nuevo salario. (DD de Mes de AAAA):'
         "Nombre del cargo": "Cargo del empleado."
-        "$ Salario" : 'Nuevo salario del colaborador (Ejm: 2.500.000)'
-        "Num_horas_semanales" : "Horas semanales de trabajo (Ejm: 45 Of entrar / 47 Region)"
+        "$Salario" : 'Nuevo salario del colaborador (Ejm: $2.500.000)'
       campos_buscar:
         "Nombre Completo del Empleado" : "NOMBRE COMPLETO EMPLEADO"
         "Nombre empleado": "NOMBRE EMPLEADO"
@@ -82,15 +81,16 @@ config_lateral_var:
       campos_digitar: 
         "Fecha_dia_actual" : "Fecha de realización de la carta: (DD de Mes de AAAA)"
         "DD de MM de AA" : 'Fecha inicio nuevo salario. (DD de Mes de AAAA):'
-        "Nuevo Cargo" : 'Nuevo cargo del colaborador:'
+        "Nombre del cargo" : 'Nuevo cargo del colaborador:'
         "$ Salario" : 'Salario Básico mensual (Ejm: $ 2.500.000)'
       campos_buscar:
         "Nombre Completo del Empleado" : "NOMBRE COMPLETO EMPLEADO"
         "Nombre empleado": "NOMBRE EMPLEADO"
         "Ciudad" : "CIUDAD DE TRABAJO"
-        "Documento de identidad líder" : "CEDULA_LIDER"
-        "Documento de identidad" : CEDULA
+        "Documento de identidad" : "CEDULA"
+        "Documento_trabajador" : "CEDULA"
         "Fecha_antiguedad": "FECHA_ANTIGUEDAD_FORMATEADA"
+        "REGIONAL FISICA" : "REGIONAL FISICA"
       contiene_tablas: "No"
     "F Otro Si Licencia No Remunerada por Estudio.docx":
       campos_digitar: 

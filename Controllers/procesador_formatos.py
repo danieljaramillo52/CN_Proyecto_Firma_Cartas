@@ -60,8 +60,9 @@ class ProcesadorFormatosWord:
             if texto_modificado != texto_original:
                 estilo_base = p.runs[0].style if p.runs else None
                 fuente_base = p.runs[0].font if p.runs else None
-                for run in p.runs:
-                    run.clear()
+                
+                p.clear()
+                
                 nuevo_run = p.add_run(texto_modificado)
                 if estilo_base:
                     nuevo_run.style = estilo_base
@@ -107,6 +108,24 @@ class ProcesadorFormatosWord:
         reemplazos["Salario Fijo %"] = fijo_pct
         reemplazos["Salario Variable %"] = variable_pct
         reemplazos["$ Salario Total"] = f"$ {round(number=total,ndigits=0)}"
+        return reemplazos
+    
+    @staticmethod
+    def _inject_horas_semanales(reemplazos: Dict[str, str]):
+        """
+        Lee de `reemplazos` las clave **exacta**:
+            - "REGIONAL FISICA"
+        Determina las horas laborales según un único criterio.
+
+        Returns:
+            Dict[str, str]: El mismo diccionario `reemplazos` con las nuevas claves añadidas/actualizadas.
+        """
+        OFICINA_CENRAL = "OFICINA CENTRAL MEDELLIN"
+        regional_raw = reemplazos.get("REGIONAL FISICA", 0)
+    
+        horas = 47 if regional_raw != OFICINA_CENRAL else 45
+        
+        reemplazos["Num_horas_semanales"] = str(int(horas)) 
         return reemplazos
     
     @classmethod
@@ -163,23 +182,48 @@ class ProcesadorFormatosWord:
             if len(tabla.columns) > 2:
                 tabla.cell(i, 2).text = porcentaje
 
+    
+
+    @classmethod
+    def _replace_apl_por_coordenadas(cls, doc: Document, reemplazos: Dict[str, str]) -> None:
+        """
+        Reemplaza, por coordenadas, los campos específicos del formato
+        'F Formalización de APL en Cargo.docx' dentro de la tabla 0.
+
+        Coordenadas (tabla 0):
+            - 'Documento_trabajador'            -> (9, 0)
+            - 'Documento de identidad líder'    -> (12, 0)
+
+        Notas:
+            - Si la celda tiene más texto, se usa .replace(clave, valor).
+            - Si falta alguna clave en `reemplazos`, se omite silenciosamente.
+        """
+        if not doc.tables:
+            return
+
+        tabla = doc.tables[0]
+        COORDS = {
+            "Documento_trabajador": (9, 0),
+            "Documento de identidad líder": (12, 0),
+        }
+
+        for clave, (fila, col) in COORDS.items():
+            if fila < len(tabla.rows) and col < len(tabla.columns) and clave in reemplazos:
+                cell = tabla.cell(fila, col)
+                # Reemplaza solo la clave, por si la celda tiene prefijos/sufijos (p.ej., "C.C:  ...")
+                cell.text = cell.text.replace(clave, str(reemplazos[clave]))
+
+
+
     def procesar(
         self, nombre_formato: str, reemplazos: Dict[str, str], contiene_tablas: str
     ) -> Document:
         """
         Devuelve una **copia** de la plantilla solicitada con reemplazos aplicados en párrafos
         y, opcionalmente, en la primera tabla (desglose salarial).
-
-        Args:
-            nombre_formato (str): Clave de la plantilla en `st.session_state["formatos_cartas"]`.
-            reemplazos (Dict[str, str]): Mapa de sustitución para párrafos y/o tablas.
-            contiene_tablas (str): "sí" (insensible a mayúsculas) para aplicar lógica de tablas.
-
-        Returns:
-            Document: Documento `python-docx` modificado (la plantilla original no se altera).
-
         """
-        FORMATO_UNICO = "F Otrosi Cambio Salario Fijo a Variable.docx"
+        FORMATO_F_A_V = "F Otrosi Cambio Salario Fijo a Variable.docx"
+        FORMATO_APL = "F Formalización de APL en Cargo.docx"
         
         formatos_mem = st.session_state.get("formatos_cartas", {})
         if nombre_formato not in formatos_mem:
@@ -191,13 +235,23 @@ class ProcesadorFormatosWord:
         buffer.seek(0)
         doc_copia = Document(buffer)
 
-        if nombre_formato == FORMATO_UNICO:
+        # Lógica previa de inyección según formato
+        if nombre_formato == FORMATO_APL:
+            reemplazos = self._inject_horas_semanales(reemplazos)
+
+        if nombre_formato == FORMATO_F_A_V:
             reemplazos = self._inject_porcentajes_salario_fijo_variable(reemplazos)
-            
+
+        # Reemplazos generales en párrafos
         self._replace_in_paragraphs(doc_copia, reemplazos)
 
+        # 👉 Reemplazos por coordenadas SOLO para el formato APL
+        if nombre_formato == FORMATO_APL:
+            self._replace_apl_por_coordenadas(doc_copia, reemplazos)
+
+        # Lógica de tablas (desglose salarial) solo si aplica
         if contiene_tablas.lower() == "sí":
             self._replace_in_tables(doc_copia, reemplazos)
 
         return doc_copia
-    
+
