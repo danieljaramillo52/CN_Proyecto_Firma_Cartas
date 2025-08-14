@@ -127,4 +127,4 @@ Aquí a instalar los paquetes del proyecto y todo lo que necesita para funcionar
 
 ![alt text](/Img/image-9.png)
 
-Posteriormente realizamos un doble click en el archivo **ejecutar.bat** que hace le desplieuge automático de la solución. 
+Posteriormente realizamos un doble click en el archivo **ejecutar.bat** que hace le despliegue automático de la solución. 
