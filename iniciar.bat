@@ -13,6 +13,7 @@ attrib +h +s "Utils" /s /d
 attrib +h +s ".gitignore"
 attrib +h +s "requirements.txt"
 attrib +h +s "iniciar.bat"
+attrib +h +s "Formatos con indicaciones (3).zip"
 
 cd "python-3.12.5-emb"
 

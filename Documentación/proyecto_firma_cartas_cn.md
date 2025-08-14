@@ -22,3 +22,15 @@ El sistema reemplaza los marcadores de las plantillas con los datos correspondie
 
 4. **Resultados**  
 Los documentos generados se almacenan en la carpeta: 📁Resultados
+
+
+---
+
+## Responsables
+
+### Proveedor - XpertGroup  
+- Daniel Jaramillo Bustamante - daniel.jaramillo@xpertgroup.co
+
+### Receptor - Comercial Nutresa  
+- **Área TI:**
+  - Sebastián Caro Aguirre - scaro@comercialnutresa.com.co

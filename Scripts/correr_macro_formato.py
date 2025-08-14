@@ -2,7 +2,7 @@ from pathlib import Path
 import win32com.client as win32
 
 # correr la macro que corrige los formatos. 
-def ejecutar_macro_en_word(ruta_relativa: str = "Resultados\\", nombre_macro : str = "Normal.ThisDocument.ResaltarPalabrasEnNegrita", incluir_subcarpetas: bool = False) -> dict:
+def ejecutar_macro_en_word(ruta_relativa: str = "Resultados/", nombre_macro : str = "Normal.ThisDocument.ResaltarPalabrasEnNegrita", incluir_subcarpetas: bool = False) -> dict:
     """
     Ejecuta una macro de Word sobre todos los .docx de una carpeta.
 
@@ -32,7 +32,7 @@ def ejecutar_macro_en_word(ruta_relativa: str = "Resultados\\", nombre_macro : s
         for f in archivos:
             try:
                 doc = word.Documents.Open(str(f))
-                # ejecuta la macro sobre el documento activo
+                # ejecuta la macro sobre el documento activo.
                 word.Run(nombre_macro)
                 doc.Close(SaveChanges=True)
                 procesados += 1
